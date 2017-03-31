@@ -7,10 +7,14 @@
 <body>
 	<th:block th:include="fragments/header :: header"></th:block>
 	<div class="container">
-		<div class="jumbotron">
-			<h1>Welcome to our Library</h1>
-			<h2>Ala ma kota</h2>
-		</div>
+		<h1>Error</h1>
+		<h2>Application has encountered an error. Please contact support.</h2>
+		<span th:text="${url}">Error was not identified</span>  
+		<table>
+			<tr th:each = "ex : ${exceptions}">
+				<td th:text="${ex}">Wiadomoœæ</td>
+			</tr>
+		</table>		 
 	</div>
 	<th:block th:include="fragments/footer :: footer"></th:block>
 </body>
