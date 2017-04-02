@@ -20,6 +20,7 @@ public class LoginController {
 	
 	@PostMapping("/login")
 	public String loginSubmit(@Valid LoginForm loginForm, BindingResult bindingResult){
+		//TODO login submit
 		System.out.println(loginForm.toString());
 		if(bindingResult.hasErrors())
 			return "login";
