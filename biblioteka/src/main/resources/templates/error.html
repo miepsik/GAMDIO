@@ -7,7 +7,7 @@
 <body>
 	<th:block th:include="fragments/header :: header"></th:block>
 	<div class="container">
-		<h1>Error</h1>
+		<h1>Error <span th:text="${status}"></span></h1>
 		<h2>Application has encountered an error. Please contact support.</h2>
 		<span th:text="${url}">Error was not identified</span>  
 		<table>

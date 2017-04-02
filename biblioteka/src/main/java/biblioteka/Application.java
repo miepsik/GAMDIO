@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Damian
  *
  */ 
-@ComponentScan
+
 @SpringBootApplication
 public class Application {
 
@@ -19,7 +19,7 @@ public class Application {
      * @param args arguments from command line
      */
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(Application.class, args); 
     }
 
 }
