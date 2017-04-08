@@ -9,11 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class BookController {
 	private class Book{ 
+		@SuppressWarnings("unused")
 		public String name = "Ala ma kota";
 	}
-	@RequestMapping("/listBooks")
+	@RequestMapping("/books")
 	ModelAndView list(){
-		ModelAndView mav = new ModelAndView("listBooks");
+		ModelAndView mav = new ModelAndView("books");
 		ArrayList<Book> lista = new ArrayList<Book>();
 		lista.add(new Book());
 		lista.add(new Book());

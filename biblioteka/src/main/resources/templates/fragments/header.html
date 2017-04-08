@@ -41,23 +41,24 @@
 							<span class = "icon-bar"></span>
 							<span class = "icon-bar"></span>
 						</button>-->
-						<a class="navbar-brand" href="#">Biblioteka</a>
+						<a class="navbar-brand" href="/">Biblioteka</a>
 					</div>
 
 					<div class="collapse navbar-collapse" id="fancy-navbar">
+						<p class="navbar-text navbar-right" sec:authorize="isAuthenticated()">Logged in as <a th:href="@{'/user/'+${currentUser.user.id}}" th:text = "${currentUser.Username}"></a></p> 
 						<ul class="nav navbar-nav navbar-right">
-							<li th:text="${username}"></li>
 							<li class="active"><a href="/">Home</a></li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"> Available actions <b class="caret"></b>
 							</a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">Search library</a></li>
+									<li><a href="/books">Search library</a></li>
 									<li class="divider"></li>
-									<li><a href="/listBooks">Something else?</a></li>
+									<li><a href="/users">List users</a></li>
+									<li><a href="#">Something else</a></li>
 								</ul></li>
 								<li sec:authorize="isAuthenticated()"><a href="/logout">Log out</a></li>
-								<li sec:authorize="isAnonymous()"><a href="#">Register</a></li>
+								<li sec:authorize="isAnonymous()"><a href="/public/create">Register</a></li>
 								<li sec:authorize="isAnonymous()"><a href="/login">Log in <i class="fa fa-key"
 										aria-hidden="true"></i></a></li>
 						</ul>

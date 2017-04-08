@@ -10,4 +10,4 @@ public class HomeController {
 		return "index";
 	}
 }
- 
+//UserDetails currentUser = (UserDetails) authentication.getPrincipal();

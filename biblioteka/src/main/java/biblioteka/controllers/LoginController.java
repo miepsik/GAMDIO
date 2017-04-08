@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,11 +24,11 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String loginSubmit(@Valid LoginForm loginForm, BindingResult bindingResult){
-		//TODO login submit
+	public String loginSubmit(@Valid @ModelAttribute("form") LoginForm loginForm, BindingResult bindingResult){
 		System.out.println(loginForm.toString());
 		if(bindingResult.hasErrors())
 			return "login";
 		return "redirect:/";
 	} 
+	
 }

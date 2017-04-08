@@ -26,26 +26,24 @@
 									<tbody th:each="book : ${books}">
 										<tr>
 											<td th:text="${book.name}">Name</td>
-											<td><a href="#"> <i class="fa fa-pencil"></i>
-													Edit
+											<td><a href="#"> <i class="fa fa-pencil"></i> Edit
 											</a></td>
-											<td><a href="#"> <i class="fa fa-trash"></i>
-													Delete
+											<td><a href="#"> <i class="fa fa-trash"></i> Delete
 											</a></td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 						</div>
-						<div th:if="${#lists.isEmpty(books)}">
+						<div style="text-align: center">
 							<div style="text-align: center">
-								<div style="text-align: center">
+								<div th:if="${#lists.isEmpty(books)}">
 									<h3>No books have been added.</h3>
-									<hr class="intro-divider"></hr>
-									<a href="#" class="btn btn-default btn-lg"> <i
-										class="fa fa-plus"></i> Add Book
-									</a>
 								</div>
+								<hr class="intro-divider"></hr>
+								<a href="#" class="btn btn-default btn-lg"> <i
+									class="fa fa-plus"></i> Add Book
+								</a>
 							</div>
 						</div>
 					</div>

@@ -2,6 +2,7 @@ package biblioteka.forms;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 import lombok.Getter;
@@ -14,7 +15,7 @@ public class LoginForm {
 	@Size(min=2, max=30)
 	@Getter
 	@Setter
-	String username;
+	String email;
 	
 	@NotNull
 	@NotEmpty

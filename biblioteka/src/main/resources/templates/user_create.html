@@ -9,13 +9,17 @@
 <body>
 	<th:block th:include="fragments/header :: header"></th:block>
 	<div class="container">
-		<form role="form" th:action="@{/login}" th:object="${form}" method="post">
-			<p th:if="${#fields.hasErrors('*')}" th:errors="*{*}">Name Error</p>
+		<form role="form" th:action="@{${action}}" th:object="${form}" method="post">
+		
+			<ul class="list-of-errors-in-form" th:each="err : ${#fields.errors('*')}">
+			    <li class="alert alert-danger"><span>Warning!</span> <span th:text="${err}"></span></li>
+			</ul>
+		
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			<div class="form-group">
 				<label for="email">Email:</label> 
 				<input type="text"
-					th:field="*{email}"
+					th:field="*{email}"				
 					class="form-control" 
 					id="email" 
 					name="email"/>
@@ -27,6 +31,14 @@
 					class="form-control" 
 					id="password" 
 					name="password"/>
+			</div>
+			<div class="form-group">
+				<label for="password">Repeated password:</label> 
+				<input type="password"
+					th:field="*{passwordRepeated}"
+					class="form-control" 
+					id="passwordRepeated" 
+					name="passwordRepeated"/>
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
