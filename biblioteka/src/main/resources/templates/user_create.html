@@ -8,41 +8,84 @@
 </head>
 <body>
 	<th:block th:include="fragments/header :: header"></th:block>
-	<div class="container">
-		<form role="form" th:action="@{${action}}" th:object="${form}" method="post">
-		
-			<ul class="list-of-errors-in-form" th:each="err : ${#fields.errors('*')}">
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
+			<div class="page-header">
+				<h1>
+					Dołącz do Nas! <small>załóż bezpłatne konto i zacznij korzystać z serwisu</small>
+				</h1>
+			</div>
+		</div>
+		<div class="col-md-1">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-5">
+			<form role="form" th:action="@{${action}}" th:object="${form}" method="post">
+                <ul class="list-of-errors-in-form" th:each="err : ${#fields.errors('*')}">
 			    <li class="alert alert-danger"><span>Warning!</span> <span th:text="${err}"></span></li>
 			</ul>
 		
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			<div class="form-group">
-				<label for="email">Email:</label> 
-				<input type="text"
-					th:field="*{email}"				
-					class="form-control" 
-					id="email" 
-					name="email"/>
-			</div>
-			<div class="form-group">
-				<label for="password">Password:</label> 
-				<input type="password"
-					th:field="*{password}"
-					class="form-control" 
-					id="password" 
-					name="password"/>
-			</div>
-			<div class="form-group">
-				<label for="password">Repeated password:</label> 
-				<input type="password"
-					th:field="*{passwordRepeated}"
-					class="form-control" 
-					id="passwordRepeated" 
-					name="passwordRepeated"/>
-			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+				<div class="form-group">
+					<label for="email">
+						Email address
+					</label>
+					<input type="text" th:field="*{email}" class="form-control" id="email" name="email" />
+				</div>
+				
+				<div class="form-group">
+					 
+					<label for="password">
+						Password
+					</label>
+					<input type="password" th:field="*{password}" class="form-control" id="password" name="password" />
+				</div>
+				<div class="form-group">
+					 
+					<label for="password">
+						Repeat password
+					</label>
+					<input type="password" th:field="*{passwordRepeated}" class="form-control" id="passwordRepeated" name="passwordRepeated" />
+				</div>
+				<button type="submit" class="btn btn-primary">
+					Zerejestruj
+				</button>
+			</form>
+		</div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-4">
+			<dl>
+				<dt>
+					Wystarczy parę sekund
+				</dt>
+				<dd>
+					Założenie konta jest błyskawiczne i nie wymaga weryfikacji.
+				</dd>
+				<dt>
+					Pełna funkcjonalność
+				</dt>
+				<dd>
+					Darmowe konto pozwala na korzystanie ze wszystkim opcji oferowanych przez serwis
+				</dd>
+				<dt>
+					Dożywotnia gwarancja 
+				</dt>
+				<dd>
+					Funkcjonalność twojego konta nigdy nie zostanie ograniczona, a ono samo nie zostanie usunięte!
+				</dd>
+			</dl>
+		</div>
+		<div class="col-md-1">
+		</div>
 	</div>
+</div>
 	<th:block th:include="fragments/footer :: footer"></th:block>
 </body>
 </html>

@@ -8,12 +8,34 @@
 </head>
 <body>
 	<th:block th:include="fragments/header :: header"></th:block>
-	<div class="container">
-		<div class="jumbotron">
-			<h1>Welcome to our Library</h1>
-			<h2>Ala ma kota</h2>
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="jumbotron">
+				<h2>
+					Witaj!
+				</h2>
+				<p>
+					Oto nasz nowo powstały serwis biblioteczny.
+					Możesz tutaj znaleźć interesujące tytuły twoich ulubionych autorów. Niezbędna jest do tego całkowicie bezpłatna rejestracja.
+				</p>
+			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-4">
+			<h2>
+				Plany na przyszłość...
+			</h2>
+			<p>
+				Planujemy rozwijać serwis, gdyż w innym przypadku możemy
+				nie zaliczyć przedmiotu. Także będziemy poszerzać naszą bazę danych, zwiększać funkcjonalność oraz polepszać estetykę i łatwość nawigacji po serwisie.
+			</p>
+		</div>
+	</div>
+</div>
 	<th:block th:include="fragments/footer :: footer"></th:block>
 </body>
 </html>
