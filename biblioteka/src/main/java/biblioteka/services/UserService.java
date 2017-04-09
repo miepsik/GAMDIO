@@ -6,6 +6,10 @@ import java.util.Optional;
 import biblioteka.forms.UserCreateForm;
 import biblioteka.model.User;
 
+/**Interface describing accessing user table
+ * @author Damian
+ *
+ */
 public interface UserService {
 	Optional<User> getUserById(long id);
 	Optional<User> getUserByEmail(String email);

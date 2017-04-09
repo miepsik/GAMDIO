@@ -36,7 +36,7 @@ public class CustomErrorController implements ErrorController{
 		return mav;
 	}
 
-	/** return path to error
+	/** return path to error page
 	 * @see org.springframework.boot.autoconfigure.web.ErrorController#getErrorPath()
 	 */
 	@Override

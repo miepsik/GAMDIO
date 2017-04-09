@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 
 import biblioteka.model.Role;
 
-/**
+/**Interface allowing checking if page can be accessed by user ofr admin
  * @author Damian
  *
  */
 @Service
 public class CurrentUserServiceImplementation implements CurrentUserService {
 
-	/* (non-Javadoc)
+	/**Check if page can be accessed if current role
 	 * @see biblioteka.services.CurrentUserService#canAccessUser(biblioteka.services.CurrentUser, java.lang.Long)
 	 */
 	@Override
