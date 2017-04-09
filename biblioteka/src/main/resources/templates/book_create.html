@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	lang = "en">
+<head>
+	<title>Library</title>
+	<th:block th:include="fragments/includes :: head"></th:block>
+</head>
+<body>
+	<th:block th:include="fragments/header :: header"></th:block>
+	<div class="container">
+		<form role="form" th:action="@{${action}}" th:object="${form}" method="post">
+		
+			<ul class="list-of-errors-in-form" th:each="err : ${#fields.errors('*')}">
+			    <li class="alert alert-danger"><span>Warning!</span> <span th:text="${err}"></span></li>
+			</ul>
+		
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			<div class="form-group">
+				<label for="title">Title:</label> 
+				<input type="text"
+					th:field="*{title}"				
+					class="form-control" 
+					id="title" 
+					name="title"/>
+			</div>
+			<div class="form-group">
+				<label for="category">Category:</label> 
+				<input type="text"
+					th:field="*{category}"				
+					class="form-control" 
+					id="category" 
+					name="category"/>
+			</div>
+			<div class="form-group">
+				<label for="state">State:</label> 
+				<input type="text"
+					th:field="*{state}"				
+					class="form-control" 
+					id="state" 
+					name="state"/>
+			</div>
+			<div class="form-group">
+				<label for="name">Name:</label> 
+				<input type="text"
+					th:field="*{name}"				
+					class="form-control" 
+					id="name" 
+					name="name"/>
+			</div>
+			<div class="form-group">
+				<label for="surname">Surname:</label> 
+				<input type="text"
+					th:field="*{surname}"				
+					class="form-control" 
+					id="surname" 
+					name="surname"/>
+			</div>
+			
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+	<th:block th:include="fragments/footer :: footer"></th:block>
+</body>
+</html>

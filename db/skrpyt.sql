@@ -1,16 +1,16 @@
 CREATE TABLE Autorzy (
-      ID int(11) NOT NULL AUTO_INCREMENT,
+      ID bigint(20) NOT NULL AUTO_INCREMENT,
       imie varchar(25) DEFAULT NULL,
       nazwisko varchar(25) DEFAULT NULL,
       PRIMARY KEY (ID)
 )
 
 CREATE TABLE Ksiazki (
-      ID int(11) NOT NULL,
+      ID bigint(20) NOT NULL,
       tytul varchar(50) DEFAULT NULL,
       kategoria varchar(10) DEFAULT NULL,
       stan int(11) DEFAULT NULL,
-      IDAutora int(11) DEFAULT NULL,
+      IDAutora bigint(20) DEFAULT NULL,
       ilosc int(11) DEFAULT NULL,
       wypozyczenia int(11) DEFAULT NULL,
       PRIMARY KEY (ID),
@@ -20,10 +20,10 @@ CREATE TABLE Ksiazki (
 )
 
 CREATE TABLE Pozycje (
-      ID int(11) NOT NULL AUTO_INCREMENT,
+      ID bigint(20) NOT NULL AUTO_INCREMENT,
       polka int(11) DEFAULT NULL,
       dostepnosc int(11) DEFAULT NULL,
-      IDKsiazki int(11) DEFAULT NULL,
+      IDKsiazki bigint(20) NOT NULL,
       dzial varchar(3) DEFAULT NULL,
       PRIMARY KEY (ID),
       KEY ksiazka (IDKsiazki),
@@ -31,9 +31,10 @@ CREATE TABLE Pozycje (
 )
 
 CREATE TABLE USERS (
-      ID int(11) NOT NULL AUTO_INCREMENT,
-      login varchar(25) DEFAULT NULL,
-      haslo varchar(25) DEFAULT NULL,
+      ID bigint(20) NOT NULL AUTO_INCREMENT,
+      email varchar(255) DEFAULT NULL UNIQUE,
+      hasloHash varchar(255) DEFAULT NULL,
+	  role varchar(5) NOT NULL,
       imie varchar(25) DEFAULT NULL,
       nazwisko varchar(25) DEFAULT NULL,
       level int(11) DEFAULT NULL,

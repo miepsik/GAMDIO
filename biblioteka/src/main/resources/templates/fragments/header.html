@@ -45,14 +45,16 @@
 					</div>
 
 					<div class="collapse navbar-collapse" id="fancy-navbar">
-						<p class="navbar-text navbar-right" sec:authorize="isAuthenticated()">Logged in as <a th:href="@{'/user/'+${currentUser.user.id}}" th:text = "${currentUser.Username}"></a></p> 
+						<p class="navbar-text navbar-right" sec:authorize="isAuthenticated()" th:if="${currentUser}!=null">
+							Logged in as <a th:href="@{'/user/'+${currentUser.user.id}}" th:text = "${currentUser.Username}"></a>
+						</p> 
 						<ul class="nav navbar-nav navbar-right">
 							<li class="active"><a href="/">Home</a></li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown"> Available actions <b class="caret"></b>
 							</a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a href="/books">Search library</a></li>
+									<li><a href="/public/books">Search library</a></li>
 									<li class="divider"></li>
 									<li><a href="/users">List users</a></li>
 									<li><a href="#">Something else</a></li>

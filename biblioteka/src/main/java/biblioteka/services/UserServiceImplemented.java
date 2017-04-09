@@ -60,7 +60,6 @@ public class UserServiceImplemented implements UserService {
 		user.setEmail(form.getEmail());
 		user.setPasswordHash(new BCryptPasswordEncoder().encode(form.getPassword()));
 		user.setRole(form.getRole());
-		System.out.println(user.toString());
 		return userRepository.save(user);
 	}
 
@@ -70,11 +69,9 @@ public class UserServiceImplemented implements UserService {
 	@Override
 	public User update(UserCreateForm form, Long id) {
 		User user = userRepository.getOne(id);
-		System.out.println(user.toString());
 		user.setEmail(form.getEmail());
 		user.setPasswordHash(new BCryptPasswordEncoder().encode(form.getPassword()));
 		user.setRole(form.getRole());
-		System.out.println(user.toString());
 		return userRepository.save(user);
 	}
 
