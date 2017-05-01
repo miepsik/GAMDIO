@@ -34,11 +34,12 @@ public class Position {
 	
 	@Getter
 	@Setter
-	@Column(name = "dostepnosc", length = 11)
-	private Long availability = new Long(0L);
+	@Column(name = "dostepnosc", length = 1)
+	private int availability = 0;
 	
 	@Getter
 	@Setter
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idKsiazki", nullable = false)
 	private Long idBook;
 	

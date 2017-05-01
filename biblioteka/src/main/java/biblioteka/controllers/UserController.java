@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -85,7 +86,14 @@ public class UserController {
 	@PreAuthorize("@currentUserServiceImplementation.canAccessUser(principal,#id)")
 	@PostMapping("/user/{id}")
 	public String handleUserEdition(@PathVariable Long id, @Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult){		
-		if(bindingResult.hasErrors()){
+		boolean t = false;
+		for(ObjectError error : bindingResult.getAllErrors())
+			if(!error.getCode().equalsIgnoreCase("email")){
+				t = true;
+				break;
+			}
+		
+		if(t){
 			return "redirect:/user/"+id;
 		}
 		userService.update(form,id);
