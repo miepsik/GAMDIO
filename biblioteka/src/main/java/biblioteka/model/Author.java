@@ -53,17 +53,10 @@ public class Author {
 			book.setAuthor(this);
 		}
 	}
-	
-	public void removeBook(Book book){
-		this.books.remove(book);
-		if(!book.getAuthor().equals(this)){
-			book.setAuthor(null);
-		}
-	}
 
 	@Override
 	public String toString() {
-		return "Author [id=" + id + ", name=" + name + ", surname=" + surname + ", books=" + books.size() + "]";
+		return "Author [id=" + id + ", name=" + name + ", surname=" + surname + ", #books=" + books.size() + "]";
 	}
 	
 	

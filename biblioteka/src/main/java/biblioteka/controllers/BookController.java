@@ -76,7 +76,6 @@ public class BookController {
 	 */
 	@PostMapping(value = "/book/create") 
 	public String handleBookCreation(@Valid @ModelAttribute("form") BookCreateForm form, BindingResult bindingResult){
-		System.out.println("Ala ma kota");
 		if(bindingResult.hasErrors()){
 			return "book_create";
 		}

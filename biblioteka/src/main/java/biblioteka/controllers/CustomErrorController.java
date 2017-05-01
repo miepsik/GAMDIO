@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @ControllerAdvice
+
 public class CustomErrorController implements ErrorController{ 
 	
 	private static final String PATH = "/error";

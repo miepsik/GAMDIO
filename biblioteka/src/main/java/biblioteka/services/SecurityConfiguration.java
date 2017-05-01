@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
@@ -34,6 +36,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
         return new SpringSecurityDialect(); 
     }
 	
+	/**Provide csrf token repository
+	 * @return
+	 */
+	private CsrfTokenRepository csrfTokenRepository() 
+	{ 
+	    HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository(); 
+	    repository.setSessionAttributeName("_csrf");
+	    return repository; 
+	}
+	
 	/**Configuring access rights
 	 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
 	 */
@@ -41,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests()
 				.antMatchers("/","/public/**","/error").permitAll()
-				.anyRequest().fullyAuthenticated()
+				.anyRequest().authenticated()
 				.and()
 			.formLogin()
 				.loginPage("/login")
@@ -58,6 +70,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				.rememberMeParameter("remember-me")
 				.rememberMeCookieName("my-remember-me")
 				.tokenValiditySeconds(86400);
+		
+		http.csrf().csrfTokenRepository(this.csrfTokenRepository());
 						
 	}
 	 

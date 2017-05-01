@@ -1,5 +1,9 @@
 package biblioteka.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -17,7 +22,6 @@ import lombok.Setter;
  * @author Damian
  *
  */
-//TODO indeksy na idautora i tytul
 @Entity
 @Table(name = "Ksiazki")
 public class Book {
@@ -57,6 +61,27 @@ public class Book {
 	@Setter
 	@Column(name = "wypozyczenia", length = 11)
 	private Integer borrows = 0;
+	
+	@Getter
+	@Setter
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Position> copies = new HashSet<Position>();
+	
+	public void addPosition(Position book){
+		this.copies.add(book);
+		this.amount++;
+		if(!book.getBook().equals(this)){
+			book.setBook(this);
+		}
+	}
+	
+	public void removePosition(Position pos){
+		this.copies.remove(pos);
+		this.amount--;
+		if(pos.getBook().equals(this)){
+			pos.setBook(null);
+		}
+	}
 
 	public void setAuthor(Author author) {
 		this.author = author;
