@@ -38,16 +38,7 @@ public class BookCreateFormValidator implements Validator {
 	@Override
 	public void validate(Object arg0, Errors arg1) {
 		BookCreateForm form = (BookCreateForm) arg0;
-		Collection<Author> authors = bookService.getAuthorsBySurname(form.getSurname());
-
-		if(authors.size() > 1){
-			for(Author a : authors){
-				if(!a.getName().equals(form.getName())){
-					authors.remove(a);
-				}
-			}
-		}
-		
+		Collection<Author> authors = bookService.getAuthorsBySurnameAndName(form.getSurname(),form.getName());
 		if(authors.size()>1){
 			arg1.reject("authors", "Author is not identifiable.");
 		}

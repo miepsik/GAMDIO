@@ -4,7 +4,6 @@
 package biblioteka.services;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,15 +74,7 @@ public class BookServiceImplemented implements BookService {
 	 */
 	@Override
 	public Book create(BookCreateForm form){
-		Collection<Author> authors = authorRepo.findAllBySurname(form.getSurname());
-		
-		if(authors.size() > 1){
-			for(Author a : authors){
-				if(!a.getName().equals(form.getName())){
-					authors.remove(a);
-				}
-			}
-		}
+		Collection<Author> authors = authorRepo.findAllBySurnameAndName(form.getSurname(),form.getName());
 		
 		Book book = new Book();
 		book.setTitle(form.getTitle());
@@ -95,26 +86,53 @@ public class BookServiceImplemented implements BookService {
 			author = new Author();
 			author.setName(form.getName());
 			author.setSurname(form.getSurname());
-			author.setBooks(new HashSet<Book>());
-			authorRepo.save(author);
 		} else if(authors.size() == 1){
 			author = authors.iterator().next();		
 		} else {
 			return null;
 		}
-		
 		book.setAuthor(author);
-		bookRepo.save(book);
 		
+		authorRepo.save(author);
+		//bookRepo.save(book);
+				
 		return book;
 	}
 
-	/* (non-Javadoc)
+	/** Edit book given form
 	 * @see biblioteka.services.BookService#update(biblioteka.forms.BookCreateForm, java.lang.Long)
 	 */
 	@Override
 	public Book update(BookCreateForm form, Long id) {
-		// TODO Auto-generated method stub
+		Book book = bookRepo.getOne(id);
+		book.setTitle(form.getTitle());
+		book.setCategory(form.getCategory());
+		book.setState(form.getState());
+		
+		if(!(book.getAuthor().getSurname().equals(form.getSurname()) && book.getAuthor().getName().equals(form.getName()))){
+			Collection<Author> authors = authorRepo.findAllBySurnameAndName(form.getSurname(),form.getName());
+			Collection<Author> authors2 = authorRepo.findAllBySurnameAndName(book.getAuthor().getSurname(),book.getAuthor().getName());
+			Author author;
+			if(authors.isEmpty()){
+				author = new Author();
+				author.setName(form.getName());
+				author.setSurname(form.getSurname());
+			} else {//if(authors.size() == 1){
+				author = authors.iterator().next();		
+			}
+			
+			book.setAuthor(author);			
+			authorRepo.save(author);
+			
+			if(authors2.size()>0){
+				author = authors2.iterator().next();
+				if(author.getBooks().size()<=1){
+					authorRepo.delete(author);
+				}
+			}
+		}
+		System.out.println(book);
+		bookRepo.save(book);
 		return null;
 	}
 
@@ -123,16 +141,18 @@ public class BookServiceImplemented implements BookService {
 	 */
 	@Override
 	public void delete(Long id) {
-		Author author = bookRepo.getOne(id).getAuthor();
-		if(author.getBooks().size() == 1){
+		Book book = bookRepo.getOne(id);
+		bookRepo.delete(book);
+		System.out.println(book.getAuthor().getBooks().size());
+		if(book.getAuthor().getBooks().size()<2){
+			Author author = book.getAuthor();
 			authorRepo.delete(author);
 		}
-		bookRepo.delete(id);
 	}
 
 	@Override
-	public Collection<Author> getAuthorsBySurname(String surname) {
-		return authorRepo.findAllBySurname(surname);
+	public Collection<Author> getAuthorsBySurnameAndName(String surname, String name) {
+		return authorRepo.findAllBySurnameAndName(surname,name);
 	}
 
 }

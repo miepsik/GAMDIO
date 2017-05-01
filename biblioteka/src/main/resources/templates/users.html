@@ -31,7 +31,7 @@
 											<td th:text="${user.email}">Email</td>
 											<td th:text="${user.passwordHash}">Pass</td>
 											<td><a th:href="@{'/user/'+${user.id}}"> <i class="fa fa-pencil"></i> Edit</a></td>
-											<td><a th:href="@{'/deleteuser/'+${user.id}}"> <i class="fa fa-trash"></i> Delete</a></td>
+											<td><a th:href="@{'/user/delete/'+${user.id}}"> <i class="fa fa-trash"></i> Delete</a></td>
 										</tr>
 									</tbody>
 								</table>

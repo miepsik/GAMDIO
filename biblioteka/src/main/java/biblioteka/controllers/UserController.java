@@ -122,7 +122,7 @@ public class UserController {
 	 * @return html to be rendered
 	 */
 	@PreAuthorize("@currentUserServiceImplementation.canAccessUser(principal,#id)")
-	@RequestMapping("/deleteuser/{id}")
+	@RequestMapping("/user/delete/{id}")
 	public String deleteUser(@PathVariable Long id){
 		userService.delete(id);
 		return "redirect:/users";

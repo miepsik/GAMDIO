@@ -3,6 +3,7 @@
  */
 package biblioteka.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -16,13 +17,11 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /**Model of author
  * @author Damian
  *
  */
-@ToString
 @Entity
 @Table(name="Autorzy")
 public class Author {
@@ -45,6 +44,27 @@ public class Author {
 	
 	@Getter
 	@Setter
-	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-	private Set<Book> books;
+	@OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Book> books = new HashSet<Book>();
+	
+	public void addBook(Book book){
+		this.books.add(book);
+		if(!book.getAuthor().equals(this)){
+			book.setAuthor(this);
+		}
+	}
+	
+	public void removeBook(Book book){
+		this.books.remove(book);
+		if(!book.getAuthor().equals(this)){
+			book.setAuthor(null);
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Author [id=" + id + ", name=" + name + ", surname=" + surname + ", books=" + books.size() + "]";
+	}
+	
+	
 }

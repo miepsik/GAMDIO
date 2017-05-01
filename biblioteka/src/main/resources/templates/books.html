@@ -30,9 +30,9 @@
 										<tr>
 											<td th:text="${book.title}">Name</td>
 											<td th:text="${book.getAuthor().getName()}+' '+${book.getAuthor().getSurname()}">Name</td>
-											<td><a href="#"> <i class="fa fa-pencil"></i> Edit
+											<td><a th:href="@{'/book/update/'+${book.id}}"> <i class="fa fa-pencil"></i> Edit
 											</a></td>
-											<td><a href="#"> <i class="fa fa-trash"></i> Delete
+											<td><a th:href="@{'/book/delete/'+${book.id}}"> <i class="fa fa-trash"></i> Delete
 											</a></td>
 											<td><a href="#"> <i class="fa fa-plus"></i> Add
 											</a></td>

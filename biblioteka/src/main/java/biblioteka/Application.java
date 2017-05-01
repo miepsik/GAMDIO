@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**Main application
  * @author Damian
  *
- */ 
+ */
 
 @SpringBootApplication
 public class Application {
