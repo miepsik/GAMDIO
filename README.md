@@ -14,13 +14,23 @@ source dbtest.sql;
 # Zaimplementowana funkcjonalność
 
 1.Rejestracja
+
 2.Logowanie
+
 3.Edycja użytkowników
+
 4.Listowanie użytkowników
+
 5.Listowanie książek
+
 6.Edycja książek
+
 7.Dodawanie książek
+
 8.Usuwanie książek
+
 9.Listowanie książek (w sensie egzemplarzy na półce)
+
 10.Dodawanie książek (w sensie egzemplarzy na półce)
+
 11.Usuwanie książek (w sensie egzemplarzy na półce)
