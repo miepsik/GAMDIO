@@ -45,7 +45,7 @@ public class PositionController {
 		binder.addValidators(pcfv);
 	}
 	
-	@RequestMapping("/copies/{id}")
+	@RequestMapping("/public/copies/{id}")
 	public ModelAndView listCopies(@PathVariable Long id){
 		ModelAndView mav = new ModelAndView("copies");
 		mav.addObject("copies", ps.getAllCopiesById(id));
