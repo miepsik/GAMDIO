@@ -28,7 +28,7 @@ public class Borrow {
 	@Getter
 	@Setter
 	@Column(name="dataStart")
-	private Date dateStart = (Date) new java.util.Date();
+	private Date dateStart = new Date((new java.util.Date()).getTime());
 	
 	@Getter
 	@Setter
