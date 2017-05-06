@@ -1,6 +1,5 @@
-import biblioteka.model.Author;
-import biblioteka.model.Book;
-import biblioteka.model.Position;
+package biblioteka.model;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,8 +7,6 @@ import org.junit.Test;
 import java.util.HashSet;
 
 import static org.mockito.Mockito.*;
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.After;
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static org.junit.Assert.*;
 
 public class BookTest {
