@@ -1,6 +1,5 @@
 package biblioteka.model;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,10 +21,6 @@ public class BookTest {
         author = mock(Author.class);
     }
 
-    @After
-    public void tearDown() throws Exception {
-    }
-
     @Test
     public void testAddPosition() throws Exception {
         when(mock.getBook()).thenReturn(book);
@@ -37,6 +32,15 @@ public class BookTest {
     @Test
     public void testAddPosition1() throws Exception {
         when(mock.getBook()).thenReturn(new Book());
+        book.addPosition(mock);
+        assertEquals((int) book.getAmount(), 1);
+        verify(mock, times(1)).setBook(isA(Book.class));
+    }
+
+    @Test
+    public void testAddPosition2() throws Exception {
+        when(mock.getBook()).thenReturn(new Book());
+        book.addPosition(mock);
         book.addPosition(mock);
         assertEquals((int) book.getAmount(), 1);
         verify(mock, times(1)).setBook(isA(Book.class));
@@ -65,6 +69,45 @@ public class BookTest {
     }
 
     @Test
+    public void testRemovePosition2() throws Exception {
+        when(mock.getBook()).thenReturn(book);
+        book.addPosition(mock);
+        verify(mock, times(0)).setBook(isA(Book.class));
+        book.removePosition(mock);
+        assertEquals((int) book.getAmount(), 0);
+        verify(mock, times(1)).setBook(isNull(Book.class));
+    }
+
+    @Test
+    public void testRemovePosition3() throws Exception {
+        when(mock.getBook()).thenReturn(new Book()).thenReturn(book);
+        book.addPosition(mock);
+        verify(mock, times(1)).setBook(isA(Book.class));
+        book.removePosition(mock);
+        assertEquals((int) book.getAmount(), 0);
+        verify(mock, times(1)).setBook(isNull(Book.class));
+    }
+
+    @Test
+    public void testRemovePosition4() throws Exception {
+        book.removePosition(mock);
+        assertEquals((int) book.getAmount(), 0);
+        verify(mock, times(0)).setBook(isNull(Book.class));
+        verify(mock, times(0)).setBook(isA(Book.class));
+    }
+
+    @Test
+    public void testRemovePosition5() throws Exception {
+        when(mock.getBook()).thenReturn(new Book()).thenReturn(book);
+        book.addPosition(mock);
+        verify(mock, times(1)).setBook(isA(Book.class));
+        book.removePosition(mock);
+        book.removePosition(mock);
+        assertEquals((int) book.getAmount(), 0);
+        verify(mock, times(1)).setBook(isNull(Book.class));
+    }
+
+    @Test
     public void testSetAuthor() throws Exception {
         HashSet<Book> hs = new HashSet<>();
         hs.add(book);
@@ -88,6 +131,13 @@ public class BookTest {
         book.setAmount(15);
         String s = book.toString();
         assertEquals(s, "Book [id=null, title=, category=, state=0, author=null, amount=15, borrows=0]");
+    }
+
+    @Test
+    public void testToString1() throws Exception {
+        book.setTitle("Krzyżacy");
+        String s = book.toString();
+        assertEquals(s, "Book [id=null, title=Krzyżacy, category=, state=0, author=null, amount=0, borrows=0]");
     }
 
 }

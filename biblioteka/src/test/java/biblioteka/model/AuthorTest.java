@@ -33,6 +33,16 @@ public class AuthorTest {
     }
 
     @Test
+    public void testAddBook2() throws Exception {
+        when(book.getAuthor()).thenReturn(new Author());
+        author.addBook(book);
+        int x = author.getBooks().size();
+        author.addBook(book);
+        assertEquals(x, (int) author.getBooks().size());
+        verify(book, times(2)).setAuthor(isA(Author.class));
+    }
+
+    @Test
     public void testToString() throws Exception {
         String s = author.toString();
         assertEquals(s, "Author [id=null, name=, surname=, #books=0]");
