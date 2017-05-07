@@ -20,13 +20,13 @@ import lombok.ToString;
 public class PositionCreateForm {
 	@Getter
 	@Setter
-	@NotNull
+	@NotNull(message="Shelf field cannot be null")
 	@Digits(fraction = 0, integer = 11)
 	Long shelf = new Long(0L);
 	
 	@Getter
 	@Setter
-	@NotEmpty
+	@NotEmpty(message="Section field cannot be empty")
 	@NotNull
 	String section = "";
 }

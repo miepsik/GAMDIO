@@ -10,13 +10,13 @@ import lombok.ToString;
 
 @ToString
 public class LoginForm {
-	@NotNull
+	@NotNull(message="E-mail field cannot be null")
 	@Getter
 	@Setter
 	String email;
 	
 	@NotNull
-	@NotEmpty
+	@NotEmpty(message="Password cannot be empty")
 	@Getter
 	@Setter
     String password;
