@@ -8,7 +8,11 @@
 </head>
 <body>
 	<th:block th:include="fragments/header :: header"></th:block>
-	<div class="container">
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-5">
 		<form role="form" th:action="@{${action}}" th:object="${form}" method="post">
 		
 			<ul class="list-of-errors-in-form" th:each="err : ${#fields.errors('*')}">
@@ -59,6 +63,8 @@
 			
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
+		</div>
+		</div>
 	</div>
 	<th:block th:include="fragments/footer :: footer"></th:block>
 </body>

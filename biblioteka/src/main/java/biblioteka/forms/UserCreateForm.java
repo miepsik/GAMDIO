@@ -17,23 +17,23 @@ import lombok.ToString;
 public class UserCreateForm {
 	@Getter
 	@Setter
-	@NotEmpty
+	@NotEmpty(message="E-mail field cannot be empty")
 	private String email = "";
 	
 	@Getter
 	@Setter
-	@NotEmpty
+	@NotEmpty(message="Password field cannot be empty")
 	private String password = "";
 	
 	@Getter
 	@Setter
-	@NotEmpty
+	@NotEmpty(message="You have to repeat the password")
 	private String passwordRepeated = "";
 	
 	
 	@Getter
 	@Setter
-	@NotNull
+	@NotNull(message="Role field cannot be null")
 	private Role role = Role.ADMIN;
 	//private Role role = Role.USER;
 	

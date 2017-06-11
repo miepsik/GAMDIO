@@ -13,31 +13,31 @@ import lombok.ToString;
 public class BookCreateForm {
 	@Getter
 	@Setter
-	@NotEmpty
-	@NotNull
+	@NotEmpty(message="Title field cannot be empty!")
+        @NotNull
 	private String title = "";
 	
 	@Getter
 	@Setter
-	@NotEmpty
-	@NotNull
+	@NotEmpty(message="Category field cannot be empty")
+        @NotNull
 	private String category = "";
 	
 	@Getter
 	@Setter
-	@NotNull
+	@NotNull(message="State field cannot be null")
 	@Digits(fraction = 0, integer = 11)
 	private Integer state = 0;
 	
 	@Getter
 	@Setter
-	@NotEmpty
+	@NotEmpty(message="Author's name cannot be empty")
 	@NotNull
 	private String name = "";
 	
 	@Getter
 	@Setter
-	@NotEmpty
+	@NotEmpty(message="Author's surname cannot be empty")
 	@NotNull
 	private String surname = "";
 }

@@ -8,10 +8,17 @@
 </head>
 <body>
 	<th:block th:include="fragments/header :: header"></th:block>
-	<div class="container">
-		<form role="form" th:action="@{/login}" th:object="${form}" method="post">
+	
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-5">
+			<form class="form-horizontal" role="form" th:action="@{/login}" th:object="${form}" method="post">
+			
 			<p th:if="${#fields.hasErrors('*')}" th:errors="*{*}">Name Error</p>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			
 			<div class="form-group">
 				<label for="email">Email:</label> 
 				<input type="text"
@@ -31,9 +38,17 @@
 			<div class="checkbox">
 				<label for="remember-me"><input type="checkbox" name="remember-me" id="remember-me"/> Remember me</label>
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+            <button type="submit" class="btn btn-primary">
+                Sign in
+            </button>
+			</form>
+		</div>
+		<div class="col-md-5">
+		</div>
+		<div class="col-md-1">
+		</div>
 	</div>
+</div>
 	<th:block th:include="fragments/footer :: footer"></th:block>
 </body>
 </html>
