@@ -64,7 +64,7 @@
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-			</dependency>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -80,6 +80,13 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<performancetest.webservice.host>localhost</performancetest.webservice.host>
+		<performancetest.webservice.port>8080</performancetest.webservice.port>
+		<performancetest.webservice.path>/</performancetest.webservice.path>
+		<performancetest.connectTimeout>1000</performancetest.connectTimeout>
+		<performancetest.responseTimeout>3000</performancetest.responseTimeout>
+		<performancetest.threadCount>2</performancetest.threadCount>
+		<performancetest.loopCount>1000</performancetest.loopCount>
 	</properties>
 
 	<build>
@@ -87,7 +94,91 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<wait>1000</wait>
+					<maxAttempts>180</maxAttempts>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start-app-before-jmeter</id>
+						<goals>
+							<goal>start</goal>
+						</goals>
+						<phase>pre-integration-test</phase>
+						<configuration>
+							<fork>false</fork>
+						</configuration>
+					</execution>
+					<execution>
+						<id>post-integration-test</id>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+						<phase>post-integration-test</phase>
+					</execution>
+				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>com.lazerycode.jmeter</groupId>
+				<artifactId>jmeter-maven-plugin</artifactId>
+				<version>1.9.0</version>
+				<executions>
+					<execution>
+						<id>jmeter-tests</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>jmeter</goal>
+						</goals>
+						
+					</execution>
+				</executions>
+				<configuration>
+					<suppressJMeterOutput>false</suppressJMeterOutput>
+					<overrideRootLogLevel>INFO</overrideRootLogLevel>
+					<ignoreResultFailures>true</ignoreResultFailures>
+					<propertiesUser>
+						<host>${performancetest.webservice.host}</host>
+						<port>${performancetest.webservice.port}</port>
+						<path>${performancetest.webservice.path}</path>
+						<connectTimeout>${performancetest.connectTimeout}</connectTimeout>
+						<responseTimeout>${performancetest.responseTimeout}</responseTimeout>
+						<threadCount>${performancetest.threadCount}</threadCount>
+						<loopCount>${performancetest.loopCount}</loopCount>
+					</propertiesUser>
+					<propertiesJMeter>
+						<summeriser.name>summary</summeriser.name>
+						<summariser.interval>10</summariser.interval>
+						<summariser.log>true</summariser.log>
+						<summeriser.out>true</summeriser.out>
+					</propertiesJMeter>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.lazerycode.jmeter</groupId>
+				<artifactId>jmeter-analysis-maven-plugin</artifactId>
+				<version>1.0.6</version>
+				<executions>
+					<execution>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>analyze</goal>
+						</goals>
+						<configuration>
+							<!-- An AntPath-Style pattern matching a JMeter XML result file to 
+								analyze. Must be a fully qualified path. File may be GZiped, must end in 
+								.gz then. Default: not set. Required. -->
+							<source>${project.build.directory}/**/*.jtl</source>
+
+							<!-- directory where to store analysis result files. Default: ${project.build.directory} 
+								Required. -->
+							<targetDirectory>${project.build.directory}/jmeter/results</targetDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 
@@ -99,8 +190,7 @@
 				<version>2.19.1</version>
 			</plugin>
 			<plugin>
-				<groupId>
-				org.apache.maven.plugins</groupId>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.10.4</version>
 			</plugin>

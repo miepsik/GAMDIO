@@ -21,7 +21,7 @@ import biblioteka.forms.UserCreateFormValidator;
 import biblioteka.model.User;
 import biblioteka.services.UserService;
 
-/**Controlling pagges concerning users
+/**Controlling pages concerning users
  * @author Damian
  *
  */
@@ -43,7 +43,7 @@ public class UserController {
 	}
 	
 	/**Adding userCreateFormValidator to data binder
-	 * @param binder
+	 * @param binder web data binder
 	 */
 	@InitBinder("form")
 	public void initBinder(WebDataBinder binder){

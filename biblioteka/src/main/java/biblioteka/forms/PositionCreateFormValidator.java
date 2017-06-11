@@ -35,6 +35,9 @@ public class PositionCreateFormValidator implements Validator {
 		return arg0.equals(PositionCreateForm.class);
 	}
 
+	/**Validate instance of position
+	 * @see org.springframework.validation.Validator#validate(java.lang.Object, org.springframework.validation.Errors)
+	 */
 	@Override
 	public void validate(Object arg0, Errors arg1) {
 		PositionCreateForm form = (PositionCreateForm) arg0;

@@ -20,7 +20,7 @@ public class BookCreateFormValidator implements Validator {
 	private final BookService bookService;
 	
 	/**Constructor
-	 * @param bookService
+	 * @param bookService interface of book service
 	 */
 	@Autowired
 	public BookCreateFormValidator(BookService bookService) {
@@ -35,6 +35,9 @@ public class BookCreateFormValidator implements Validator {
 		return arg0.equals(BookCreateForm.class);
 	}
 
+	/**Validate instance of book creation form
+	 * @see org.springframework.validation.Validator#validate(java.lang.Object, org.springframework.validation.Errors)
+	 */
 	@Override
 	public void validate(Object arg0, Errors arg1) {
 		BookCreateForm form = (BookCreateForm) arg0;

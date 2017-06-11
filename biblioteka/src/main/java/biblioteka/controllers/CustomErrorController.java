@@ -21,7 +21,7 @@ public class CustomErrorController implements ErrorController{
 	
 	private static final String PATH = "/error";
 	
-	/**Do something with errors
+	/**Handle with errors
 	 * @param req http servlet request
 	 * @param res http servlet response
 	 * @param ex exception

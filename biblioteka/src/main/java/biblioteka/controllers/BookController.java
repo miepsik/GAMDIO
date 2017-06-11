@@ -41,7 +41,7 @@ public class BookController {
 	}
 
 	/**Adding bookCreateFormValidator to data binder
-	 * @param binder
+	 * @param binder web data binder
 	 */
 	@InitBinder("form")
 	public void initBinder(WebDataBinder binder){

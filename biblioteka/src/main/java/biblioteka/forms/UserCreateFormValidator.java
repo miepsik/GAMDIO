@@ -32,7 +32,7 @@ public class UserCreateFormValidator implements Validator {
 		return arg0.equals(UserCreateForm.class);
 	}
 
-	/**Check if password is not already in database
+	/**Validate instance of user creation form
 	 * @see org.springframework.validation.Validator#validate(java.lang.Object, org.springframework.validation.Errors)
 	 */
 	@Override

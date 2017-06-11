@@ -38,13 +38,17 @@ public class PositionController {
 	}
 	
 	/**Adding validator to data binder
-	 * @param binder
+	 * @param binder web data binder
 	 */
 	@InitBinder("form")
 	public void initBinder(WebDataBinder binder){
 		binder.addValidators(pcfv);
 	}
 	
+	/**Render list of book copies
+	 * @param id book id
+	 * @return
+	 */
 	@RequestMapping("/public/copies/{id}")
 	public ModelAndView listCopies(@PathVariable Long id){
 		ModelAndView mav = new ModelAndView("copies");
