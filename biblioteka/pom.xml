@@ -69,6 +69,10 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
+		<dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+	        <artifactId>selenium-java</artifactId>
+	    </dependency>  
 	</dependencies>
 
 	<repositories>
@@ -104,18 +108,30 @@
 						<goals>
 							<goal>start</goal>
 						</goals>
-						<phase>pre-integration-test</phase>
+						<phase>pre-jmeter-p</phase>
 						<configuration>
 							<fork>false</fork>
 						</configuration>
 					</execution>
 					<execution>
-						<id>post-integration-test</id>
+						<id>post-jmeter-p</id>
 						<goals>
 							<goal>stop</goal>
 						</goals>
-						<phase>post-integration-test</phase>
+						<phase>post-jmeter-p</phase>
 					</execution>
+					<execution>
+			          <id>pre-integration-test</id>
+			          <goals>
+			            <goal>start</goal>
+			          </goals>
+			        </execution>
+			        <execution>
+			          <id>post-integration-test</id>
+			          <goals>
+			            <goal>stop</goal>
+			          </goals>
+			        </execution>
 				</executions>
 			</plugin>
 
@@ -126,7 +142,7 @@
 				<executions>
 					<execution>
 						<id>jmeter-tests</id>
-						<phase>integration-test</phase>
+						<phase>jmeter-p</phase>
 						<goals>
 							<goal>jmeter</goal>
 						</goals>
@@ -161,7 +177,7 @@
 				<version>1.0.6</version>
 				<executions>
 					<execution>
-						<phase>post-integration-test</phase>
+						<phase>post-jmeter-p</phase>
 						<goals>
 							<goal>analyze</goal>
 						</goals>
@@ -178,7 +194,38 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-failsafe-plugin</artifactId>
+		        <version>2.15</version>
+		        <configuration>
+		            <includes>
+		              <include>**/AcceptanceTests.java</include>
+		            </includes>
+	            </configuration>
+		        <executions>
+		          <execution>
+		            <goals>
+		              <goal>integration-test</goal>
+		              <goal>verify</goal>
+		            </goals>
+		          </execution>
+		        </executions>
+		      </plugin>
+		      <plugin>
+		          <artifactId>maven-surefire-plugin</artifactId>
+		          <version>2.18.1</version>
+		          <configuration>
+		            <includes>
+		              <include>**/*Tests.java</include>
+		              <include>**/*Test.java</include>
+		            </includes>
+		            <excludes>
+		              <exclude>**/Abstract*.java</exclude>
+		              <exclude>**/AcceptanceTests.java</exclude>
+		            </excludes>
+		          </configuration>
+		        </plugin>
 		</plugins>
 	</build>
 
